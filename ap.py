@@ -4287,4 +4287,4 @@ if __name__ == '__main__':
     load_data()
     load_admins()
     print("𝗕𝗼𝘁 𝗵𝗮𝘀 𝗯𝗲𝗲𝗻 𝗹𝗮𝘂𝗻𝗰𝗵𝗲𝗱 𝘀𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹𝗹𝘆! ꧁𓊈 塘• 𝐈 𝐙 𝐀 𝐍 𝐀 ᵏᵘʳᵒᵏᵃʷᵃ𓊉꧂ ♥")
-    bot.polling(none_stop=True, skip_pending=True)
+    bot.infinity_polling()
