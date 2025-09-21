@@ -17,7 +17,7 @@ from time import sleep
 # ======================
 # 🛠️ BOT CONFIGURATION
 # ======================
-TOKEN = '7052787265:AAHCMLqw10jHXqFDLN7X1sn4XkyhWO8gr7s'
+TOKEN = '8252487896:AAGBoX8Zz4xZUXUJVbGAXDu2V3lWIhcQQp8'
 OWNER_USERNAME = "LASTWISHES0"
 ADMIN_IDS = ["LASTWISHES0", "IZANA_KUROKAWAx92"]  # Add admin usernames here
 ALLOWED_GROUP_IDS = [-1002478787198]
@@ -28,8 +28,8 @@ MAX_DURATION = 240
 SPECIAL_MAX_DURATION = 200
 VIP_MAX_DURATION = 300
 ACTIVE_VPS_COUNT = 4
-BINARY_PATH = "/home/master/freeroot/root/runner"
 BINARY_NAME = "runner"
+BINARY_PATH = f"/home/master/{BINARY_NAME}"
 KEY_PRICES = {
     "10M": 5,
     "30M": 8,
@@ -1134,7 +1134,7 @@ def process_key_generation(message):
             raise ValueError("Invalid duration format")
         
         # Generate unique key with premium format
-        unique_code = f"{random.choice(['ALONE PAPA', 'KING OF DDOS', 'ALONEBOY LEGEND'])}-{os.urandom(2).hex().upper()}-{int(time.time())%10000:04d}"
+        unique_code = f"{random.choice(['APNA BHAI', 'PARADOX BHAI', '꧁𓊈 塘• 𝐈 𝐙 𝐀 𝐍 𝐀 ᵏᵘʳᵒᵏᵃʷᵃ𓊉꧂ '])}-{os.urandom(2).hex().upper()}-{int(time.time())%10000:04d}"
         key = f"{key_type}-{duration_str}-{unique_code}"
         
         expiry_time = time.time() + expiry_seconds
@@ -1226,7 +1226,7 @@ def process_custom_key(message):
             raise ValueError("Invalid duration unit (use M, H, D or W)")
         
         # Generate unique key
-        unique_code = f"{random.choice(['ALONE', 'KING', 'LEGEND'])}-{os.urandom(2).hex().upper()}-{int(time.time())%10000:04d}"
+        unique_code = f"{random.choice(['APNA', 'PARADOX', '꧁𓊈 塘• 𝐈 𝐙 𝐀 𝐍 𝐀 ᵏᵘʳᵒᵏᵃʷᵃ𓊉꧂'])}-{os.urandom(2).hex().upper()}-{int(time.time())%10000:04d}"
         key = f"{key_type}-{duration_str}-{unique_code}"
         
         expiry_time = time.time() + expiry_seconds
@@ -1413,8 +1413,8 @@ def search_key_start(message):
         "│ Enter key or username to search:\n"
         "│\n"
         "│ Examples:\n"
-        "│ • Full key: VIP-1D-ALONE-AB12\n"
-        "│ • Partial: ALONE\n"
+        "│ • Full key: VIP-1D-APNA-AB12\n"
+        "│ • Partial: APNA\n"
         "│ • Username: @admin\n"
         "│\n"
         "╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯")
@@ -1506,7 +1506,7 @@ def delete_key_start(message):
         "│ Enter the key to delete:\n"
         "│\n"
         "│ Examples:\n"
-        "│ • VIP-1D-ALONE-AB12\n"
+        "│ • VIP-1D-APNA-AB12\n"
         "│ • STANDARD-2H-KING-CD34\n"
         "│\n"
         "╰━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╯")
@@ -2464,7 +2464,7 @@ def upload_binary_start(message):
         "│ 1. Upload your binary file\n"
         "│ 2. Must be named: `runner`\n"
         "│ 3. Will be installed to:\n"
-        "│    `/home/master/freeroot/root`\n"
+        "│    `/home/master/`\n"
         "│\n"
         "│ ⚠️ 𝗪𝗔𝗥𝗡𝗜𝗡𝗚:\n"
         "│ This will overwrite existing binaries!\n"
@@ -2521,13 +2521,13 @@ def handle_binary_upload(message):
             ssh.connect(ip, username=username, password=password, timeout=15)
             
             with SCPClient(ssh.get_transport()) as scp:
-                scp.put(temp_path, f"/home/master/freeroot/root/{BINARY_NAME}")
+                scp.put(temp_path, f"/home/master/{BINARY_NAME}")
             
             # Make executable
-            ssh.exec_command(f"chmod +x /home/master/freeroot/root/{BINARY_NAME}")
+            ssh.exec_command(f"chmod +x /home/master/{BINARY_NAME}")
             
             # Verify
-            stdin, stdout, stderr = ssh.exec_command(f"ls -la /home/master/freeroot/root/{BINARY_NAME}")
+            stdin, stdout, stderr = ssh.exec_command(f"ls -la /home/master/{BINARY_NAME}")
             if BINARY_NAME in stdout.read().decode():
                 results.append(f"✅ `{ip}` - Success")
                 success_count += 1
@@ -2613,10 +2613,10 @@ def execute_binary_deletion(call):
             ssh.connect(ip, username=username, password=password, timeout=10)
 
             # Delete binary
-            ssh.exec_command(f"rm -f /home/master/freeroot/root/{BINARY_NAME}")
+            ssh.exec_command(f"rm -f /home/master/{BINARY_NAME}")
             
             # Verify deletion
-            stdin, stdout, stderr = ssh.exec_command(f"ls /home/master/freeroot/root/{BINARY_NAME} 2>/dev/null || echo 'deleted'")
+            stdin, stdout, stderr = ssh.exec_command(f"ls /home/master/{BINARY_NAME} 2>/dev/null || echo 'deleted'")
             if "deleted" in stdout.read().decode():
                 success += 1
                 result_lines.append(f"✅ `{ip}` - Binary deleted")
@@ -3413,7 +3413,7 @@ def generate_referral(message):
         code = REFERRAL_CODES[user_id]
     else:
         # Generate new referral code
-        code = f"Alonepapa-{user_id[:4]}-{os.urandom(2).hex().upper()}"
+        code = f"APNAbhai-{user_id[:4]}-{os.urandom(2).hex().upper()}"
         REFERRAL_CODES[user_id] = code
         save_data()
     
@@ -3722,12 +3722,12 @@ def get_vps_health(ip, username, password):
         health_data['disk'] = disk_usage
         
         # 4. Check binary exists
-        stdin, stdout, stderr = ssh.exec_command(f"ls -la /home/master/freeroot/root/{BINARY_NAME} 2>/dev/null || echo 'Not found'")
+        stdin, stdout, stderr = ssh.exec_command(f"ls -la /home/master/{BINARY_NAME} 2>/dev/null || echo 'Not found'")
         binary_exists = "Not found" not in stdout.read().decode()
         health_data['binary_exists'] = binary_exists
         
         # 5. Check binary executable
-        stdin, stdout, stderr = ssh.exec_command(f"test -x /home/master/freeroot/root/{BINARY_NAME} && echo 'Executable' || echo 'Not executable'")
+        stdin, stdout, stderr = ssh.exec_command(f"test -x /home/master/{BINARY_NAME} && echo 'Executable' || echo 'Not executable'")
         binary_executable = "Executable" in stdout.read().decode()
         health_data['binary_executable'] = binary_executable
         
